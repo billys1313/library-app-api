@@ -30,5 +30,7 @@ class Book(models.Model):
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     categories = models.ManyToManyField(Category)
 
+    
+    
     def __str__(self):
-        return self.title
+            return self.title
