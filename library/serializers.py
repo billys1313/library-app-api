@@ -66,7 +66,7 @@ class BookSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("ISBN must be unique")
         return value
     """
-    #Comment test
+    
     def update(self, instance, validated_data):
         instance.title = validated_data.get('title', instance.title)
         #instance.published_date = validated_data.get('published_date', instance.published_date)
