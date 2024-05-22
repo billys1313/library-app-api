@@ -28,9 +28,7 @@ class Book(models.Model):
     isbn = models.CharField(max_length=13, unique=True)
     published_date = models.DateField()
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
-    categories = models.ManyToManyField(Category)
-
-    
+    categories = models.ManyToManyField(Category, related_name='books')
     
     def __str__(self):
-            return self.title
+        return self.title

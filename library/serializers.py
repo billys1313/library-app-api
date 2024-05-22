@@ -1,10 +1,15 @@
 from rest_framework import serializers
 from .models import Author, Book, Category
 
+class CategoryBookResponseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Book
+        fields = ['id', 'title']
+
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ['id', 'name']
+        fields = ['id', 'name', 'books']
         read_only_fields = ['id']
 
     def create(self, validated_data):
