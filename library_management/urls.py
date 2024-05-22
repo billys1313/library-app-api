@@ -30,4 +30,5 @@ urlpatterns = [
         name='api-docs',
     ),
     path('api/library/', include('library.urls')),
+    path('silk/', include('silk.urls', namespace='silk')),
 ]
