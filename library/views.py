@@ -1,5 +1,19 @@
-from rest_framework import viewsets
-from rest_framework.response import Response
+from rest_framework import (
+    viewsets,
+    views,
+    status,
+)
+from rest_framework.response import (
+    Response,
+    
+)
+import datetime
+
+from django.db.models import (
+    F,
+    Count,
+    Q,
+)
 
 from .models import (
     Author,
@@ -117,3 +131,23 @@ class CategoryViewSet(viewsets.ModelViewSet):
             category['book_titles'] = list(book_titles)
 
         return Response(serializer.data)
+    
+class QueryView(views.APIView):
+    @extend_schema(
+        summary="Retrieve a list of test query",
+        description="Retrieve a list of test query.",
+    )
+    def get(self, request, *args, **kwargs):
+        
+        start_date = datetime.date(2022, 1, 1)
+        end_date = datetime.date(2024, 5, 30)
+
+        queryset = Book.objects.filter(id__gt=31, id__lt=70)
+       
+        queryset = queryset.filter(published_date__gt=start_date, published_date__lt=end_date)
+
+        serializer = BookSerializer(queryset, many=True)
+        
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    

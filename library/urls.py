@@ -16,4 +16,5 @@ app_name = 'library'
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('query', views.QueryView.as_view(), name= "Query")
 ]
